@@ -4,6 +4,7 @@ import org.apache.ibatis.binding.BindingException;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.BadSqlGrammarException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,11 +26,14 @@ class DemoMapperTest {
     }
 
     @Test
-    void insert() {
+    void No01_マッパーXMLが見つからないとBindingException出る() {
+        MyTestUtil.myAssertThrows(BindingException.class, ()->notFoundMapper.get());
+
     }
 
     @Test
-    void マッパーXMLが見つからないとBindingException出る() {
-        assertThrows(BindingException.class, () -> notFoundMapper.get());
+    void No02_SQL文法誤りだとBadSqlGrammarException() {
+        MyTestUtil.myAssertThrows(BadSqlGrammarException.class,()-> mapper.wrongSelect());
     }
+
 }

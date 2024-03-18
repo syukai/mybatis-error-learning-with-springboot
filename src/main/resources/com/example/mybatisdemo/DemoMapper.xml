@@ -11,6 +11,10 @@
         FROM demo
     </select>
 
+    <select id="wrongSelect">
+        SSSSELECT * from demo
+    </select>
+
     <insert id="insert">
         INSERT INTO DEMO
         VALUES (#{id}, #{name}, #{quantity})

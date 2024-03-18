@@ -9,4 +9,6 @@ public interface DemoMapper {
     Demo get();
 
     void insert(@Param("id") String id, @Param("name") String name, @Param("quantity") int quantity);
+
+    Demo wrongSelect();
 }
