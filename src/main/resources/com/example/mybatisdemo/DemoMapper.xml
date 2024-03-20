@@ -11,12 +11,49 @@
         FROM demo
     </select>
 
+    <select id="getById">
+        SELECT * from demo
+        WHERE pk = #{pk.value}
+    </select>
+
+    <select id="wrongBind">
+        SSSSELECT * from demo where pk = #{wrong.value}
+    </select>
+
+    <select id="wrongProperty">
+        SSSSELECT * from demo where pk = #{pk.wrong}
+    </select>
+
     <select id="wrongSelect">
-        SSSSELECT * from demo
+        SSSSELECT  from demo where pk = #{pk.value}
+    </select>
+
+    <select id="wrongTable">
+        SELECT * from wrongtable
+    </select>
+
+
+
+
+    <resultMap id="no02_03" type="com.example.mybatisdemo.Demo">
+        <id property="pk" column="pk" />
+        <result property="name" column="name"/>
+        <result property="wrong" column="quantity"/>
+    </resultMap>
+    <select id="wrongColumn" resultMap="no02_03">
+        SELECT pk , name as quantity from demo
+    </select>
+    <!-- 起動しないパターンなのでテストしない
+    <select id="wrongResultType" resultType="Wrong">
+        SELECT pk , name as quantity from demo
+    </select>
+    -->
+    <select id="badConstructor" resultType="com.example.mybatisdemo.Demo2">
+        SELECT * from demo
     </select>
 
     <insert id="insert">
         INSERT INTO DEMO
-        VALUES (#{id}, #{name}, #{quantity})
+        VALUES (#{pk}, #{name}, #{quantity})
     </insert>
 </mapper>

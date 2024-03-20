@@ -1,7 +1,7 @@
 package com.example.mybatisdemo;
 
 public class Demo {
-    String pk;
-    String name;
-    int quantity;
+    public String pk;
+    public String name;
+    public int quantity;
 }
