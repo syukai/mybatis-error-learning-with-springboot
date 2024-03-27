@@ -31,38 +31,38 @@ class DemoMapperTest {
     }
 
     @Test
-    void No01_マッパーXMLが見つからないとBindingException出る() {
+    void No02_マッパーXMLが見つからないとBindingException出る() {
         MyTestUtil.myAssertThrows(BindingException.class, ()->notFoundMapper.get());
 
     }
 
     @Test
-    void No02_01_パラメータのエラーだとMyBatisSystemException() {
+    void No03_01_パラメータのエラーだとMyBatisSystemException() {
         MyTestUtil.myAssertThrows(MyBatisSystemException.class,()-> mapper.wrongBind(new DemoPk("1")));
     }
     @Test
-    void No02_02_パラメータのプロパティエラーだとMyBatisSystemException() {
+    void No03_02_パラメータのプロパティエラーだとMyBatisSystemException() {
         MyTestUtil.myAssertThrows(MyBatisSystemException.class,()-> mapper.wrongProperty(new DemoPk("1")));
     }
 
     @Test
-    void No02_03_列名ミスマッチだとMyBatisSystemException() {
+    void No03_03_列名ミスマッチだとMyBatisSystemException() {
         mapper.insert("a002", "name", 0);
         MyTestUtil.myAssertThrows(MyBatisSystemException.class,()-> mapper.wrongColumn());
     }
 
     @Test
-    void No04_01_SQL文法誤りだとBadSqlGrammarException() {
+    void No05_01_SQL文法誤りだとBadSqlGrammarException() {
         MyTestUtil.myAssertThrows(BadSqlGrammarException.class,()-> mapper.wrongSelect(new DemoPk("1")));
     }
 
     @Test
-    void No04_02_テーブルがないとBadSqlGrammarException() {
+    void No05_02_テーブルがないとBadSqlGrammarException() {
         MyTestUtil.myAssertThrows(BadSqlGrammarException.class,()-> mapper.wrongTable());
     }
 
     @Test
-    void No06_先頭項目が当てはまらないコンストラクタしかないとMyBatisSystemException() {
+    void No06_使えるコンストラクタがないとMyBatisSystemException() {
         mapper.insert("a002", "name", 0);
         MyTestUtil.myAssertThrows(org.mybatis.spring.MyBatisSystemException.class,()-> mapper.badConstructor());
     }
